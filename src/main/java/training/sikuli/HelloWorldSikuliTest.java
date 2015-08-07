@@ -1,30 +1,25 @@
 package training.sikuli;
 
+import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.sikuli.script.FindFailed;
 import org.sikuli.script.Screen;
 
 public class HelloWorldSikuliTest {
 
-  public static void main( String[] args ) {
-    
-    WebDriver driver = new FirefoxDriver();
-    
-    driver.manage().window().maximize();
-    
-    // And now use this to visit RZD - Russian Railways
-    driver.get( "http://property.rzd.ru/" );
+    @Test
+    public void demonstrate() throws Exception {
+        WebDriver driver = new FirefoxDriver();
+        try {
+            driver.manage().window().maximize();
+            driver.get("http://property.rzd.ru/");
 
-    Screen s = new Screen();
-    try {
-      s.doubleClick( "src/main/resources/SaintPetersburg.png" );
-      Thread.sleep( 5000 );
-    } catch ( FindFailed | InterruptedException e ) {
-      e.printStackTrace();
+            Screen s = new Screen();
+            s.doubleClick("src/main/resources/SaintPetersburg.png");
+
+            PresentationAssister.keepScreen();
+        } finally {
+            driver.quit();
+        }
     }
-
-    driver.quit();
-  }
-
 }
